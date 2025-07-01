@@ -2,6 +2,12 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 const GA_MEASUREMENT_ID = "G-0FSJJZV93J";
 
 export default function GoogleAnalytics() {
