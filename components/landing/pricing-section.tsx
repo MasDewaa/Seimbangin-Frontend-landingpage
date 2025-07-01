@@ -1,143 +1,105 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const plans = [
+  {
+    name: "Gratis",
+    price: "Rp0",
+    desc: "Cocok untuk pemula, fitur utama gratis selamanya.",
+    features: [
+      "Catat pengeluaran otomatis",
+      "Budgeting dasar",
+      "Laporan bulanan"
+    ],
+    cta: "Coba Gratis",
+    popular: false
+  },
+  {
+    name: "Premium",
+    price: "Rp49.000",
+    period: "/bulan",
+    desc: "Fitur lengkap, AI insight, support prioritas.",
+    features: [
+      "Semua fitur Gratis",
+      "AI smart insight",
+      "Sinkronisasi bank",
+      "Support prioritas"
+    ],
+    cta: "Upgrade Premium",
+    popular: true
+  },
+  {
+    name: "Family",
+    price: "Rp89.000",
+    period: "/bulan",
+    desc: "Kelola keuangan keluarga, hingga 5 akun.",
+    features: [
+      "Semua fitur Premium",
+      "5 akun keluarga",
+      "Goal bersama"
+    ],
+    cta: "Pilih Family",
+    popular: false
+  }
+];
+
 export function PricingSection() {
-  const plans = [
-    {
-      name: "Free",
-      price: "Rp0",
-      description: "Perfect for getting started",
-      features: [
-        "Basic expense tracking",
-        "Up to 5 budget categories",
-        "Monthly spending reports",
-        "Bill reminders",
-        "Manual transaction entry"
-      ],
-      cta: "Get Started",
-      popular: false
-    },
-    {
-      name: "Premium",
-      price: "Rp49,000",
-      period: "/month",
-      description: "Everything you need for personal finances",
-      features: [
-        "Unlimited expense tracking",
-        "Unlimited budget categories",
-        "Advanced financial reports",
-        "Automatic bank synchronization",
-        "Customizable savings goals",
-        "Investment tracking",
-        "Export to Excel/CSV",
-        "Priority customer support"
-      ],
-      cta: "Get Premium",
-      popular: true
-    },
-    {
-      name: "Family",
-      price: "Rp89,000",
-      period: "/month",
-      description: "Share finances with family members",
-      features: [
-        "All Premium features",
-        "Up to 5 user accounts",
-        "Shared budgeting",
-        "Group savings goals",
-        "Family finance dashboard",
-        "Expense allocation",
-        "Shared bill management",
-        "Financial planning tools"
-      ],
-      cta: "Get Family Plan",
-      popular: false
-    }
-  ];
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   return (
-    <section id="pricing" className="py-24 bg-background relative overflow-hidden" ref={ref}>
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-1/3 -left-40 w-80 h-80 rounded-full bg-primary/20 blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-20 w-64 h-64 rounded-full bg-teal-500/20 blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div 
-          className="max-w-2xl mx-auto text-center mb-16"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.5s ease, transform 0.5s ease'
-          }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Choose the Perfect Plan</h2>
-          <p className="text-lg text-muted-foreground">
-            Flexible options to fit your financial management needs.
+    <section id="pricing" className="py-20 bg-background" aria-labelledby="pricing-heading">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto text-center mb-14">
+          <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-blue-700 text-white text-xs font-semibold shadow-md">
+            Harga & Paket
+          </span>
+          <h2 id="pricing-heading" className="text-3xl md:text-4xl font-extrabold mb-4">Pilih Paket Sesuai Kebutuhanmu</h2>
+          <p className="text-lg text-muted-foreground font-light">
+            Mulai gratis, upgrade kapan saja. Semua transparan, tanpa biaya tersembunyi.
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10" role="list">
           {plans.map((plan, index) => (
-            <div 
-              key={index} 
-              className={`bg-card rounded-2xl p-8 border ${plan.popular ? 'border-teal-500/70 shadow-lg shadow-teal-500/10' : 'border-border/40 shadow-sm'} relative`}
-              style={{
-                opacity: isInView ? 1 : 0,
-                transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`
-              }}
+            <motion.article
+              key={index}
+              className={`relative bg-card rounded-3xl p-8 shadow-lg border border-border/30 flex flex-col items-center text-center group transition-all duration-300 hover:shadow-xl ${plan.popular ? 'ring-2 ring-teal-500/60 scale-105 z-10' : ''}`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              role="listitem"
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
+                <span className="absolute -top-5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-blue-700 text-white text-xs font-semibold shadow-md">
+                  Paling Populer
+                </span>
               )}
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <div className="flex items-end justify-center gap-1 mb-2">
-                  <span className="text-3xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
-                </div>
-                <p className="text-muted-foreground">{plan.description}</p>
+              <h3 className="text-xl font-bold mb-2 text-foreground">{plan.name}</h3>
+              <div className="flex items-end justify-center gap-2 mb-4">
+                <span className="text-3xl font-extrabold text-foreground">{plan.price}</span>
+                {plan.period && <span className="text-base text-muted-foreground mb-1">{plan.period}</span>}
               </div>
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-teal-500 shrink-0 mt-0.5" />
+              <p className="text-base text-muted-foreground mb-6 font-light">{plan.desc}</p>
+              <ul className="mb-8 space-y-2 text-left w-full" role="list">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-muted-foreground text-sm" role="listitem">
+                    <Check className="h-4 w-4 text-teal-500 flex-shrink-0" aria-hidden="true" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
-              <Button 
-                className={`w-full ${plan.popular ? 'bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700' : ''}`}
+              <Button
+                className={`w-full py-3 text-base font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${plan.popular ? 'bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-500 hover:to-blue-800 text-white shadow-lg' : 'bg-muted hover:bg-muted/80 text-foreground border border-border'}`}
                 variant={plan.popular ? 'default' : 'outline'}
+                asChild
               >
-                {plan.cta}
+                <a href="#cta" aria-label={`Pilih paket ${plan.name}`}>
+                  {plan.cta}
+                </a>
               </Button>
-            </div>
+            </motion.article>
           ))}
-        </div>
-
-        <div 
-          className="mt-16 text-center"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s'
-          }}
-        >
-          <p className="text-muted-foreground">
-            All plans come with a 14-day free trial. No credit card required.
-          </p>
         </div>
       </div>
     </section>

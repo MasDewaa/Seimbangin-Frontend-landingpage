@@ -1,139 +1,92 @@
 "use client";
 
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Star } from "lucide-react";
 
+const testimonials = [
+  {
+    name: "Jessica T.",
+    role: "Small Business Owner",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    quote: "Seimbang.in benar-benar mengubah cara saya mengelola keuangan. Fitur otomatisnya sangat membantu!",
+    rating: 5
+  },
+  {
+    name: "Michael L.",
+    role: "Software Engineer",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    quote: "UI-nya simpel, budgeting jadi nggak ribet. Insight AI-nya juga keren!",
+    rating: 5
+  },
+  {
+    name: "Sophia K.",
+    role: "Marketing Manager",
+    avatar: "https://randomuser.me/api/portraits/women/68.jpg",
+    quote: "Aplikasi keuangan paling balance. Semua fitur penting ada, dan gratis!",
+    rating: 5
+  },
+  {
+    name: "Raj P.",
+    role: "Healthcare Professional",
+    avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+    quote: "Progress menabung jadi lebih terpantau. Suka banget sama goal savings-nya!",
+    rating: 4
+  }
+];
+
 export function TestimonialSection() {
-  const testimonials = [
-    {
-      name: "Jessica T.",
-      role: "Small Business Owner",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-      quote: "Seimbang.in has revolutionized how I manage both personal and business finances. The custom categories and reporting tools have given me insights I never had before.",
-      rating: 5
-    },
-    {
-      name: "Michael L.",
-      role: "Software Engineer",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-      quote: "As someone who was terrible at budgeting, this app has been a game-changer. The automatic expense categorization and budget alerts keep me accountable.",
-      rating: 5
-    },
-    {
-      name: "Sophia K.",
-      role: "Marketing Manager",
-      avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-      quote: "I've tried many money management apps, but seimbang.in offers the perfect balance of powerful features and ease of use. I finally feel in control of my finances.",
-      rating: 5
-    },
-    {
-      name: "Raj P.",
-      role: "Healthcare Professional",
-      avatar: "https://randomuser.me/api/portraits/men/76.jpg",
-      quote: "The savings goals feature helped me save for my wedding in half the time I expected. The visual progress charts kept me motivated every step of the way.",
-      rating: 4
-    }
-  ];
-
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   return (
-    <section id="testimonials" className="py-24 bg-background relative overflow-hidden" ref={ref}>
-      {/* Background elements */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-1/3 -right-40 w-80 h-80 rounded-full bg-primary/20 blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-20 w-64 h-64 rounded-full bg-teal-500/20 blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div 
-          className="max-w-2xl mx-auto text-center mb-16"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.5s ease, transform 0.5s ease'
-          }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Loved by Thousands of Users</h2>
-          <p className="text-lg text-muted-foreground">
-            See how seimbang.in has helped people take control of their financial lives.
+    <section id="testimonials" className="py-20 bg-muted/30" aria-labelledby="testimonials-heading">
+      <div className="container mx-auto px-4">
+        <div className="max-w-2xl mx-auto text-center mb-14">
+          <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-blue-700 text-white text-xs font-semibold shadow-md">
+            Testimoni Pengguna
+          </span>
+          <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-extrabold mb-4">Apa Kata Mereka?</h2>
+          <p className="text-lg text-muted-foreground font-light">
+            Ribuan pengguna sudah merasakan manfaat Seimbang.in. Giliran kamu!
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" role="list">
           {testimonials.map((testimonial, index) => (
-            <div 
-              key={index} 
-              className="bg-card rounded-2xl p-8 shadow-sm border border-border/40"
-              style={{
-                opacity: isInView ? 1 : 0,
-                transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-                transition: `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`
-              }}
+            <motion.article
+              key={index}
+              className="bg-card rounded-3xl p-7 shadow-lg border border-border/30 flex flex-col items-center text-center group transition-all duration-300 hover:shadow-2xl hover:border-teal-500/40"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              role="listitem"
             >
-              <div className="flex items-center gap-2 mb-4">
-                {Array.from({ length: 5 }).map((_, i) => (
+              <div className="mb-3">
+                <Image 
+                  src={testimonial.avatar} 
+                  alt={`Foto profil ${testimonial.name}`} 
+                  width={48} 
+                  height={48} 
+                  className="rounded-full border-2 border-teal-500 shadow"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex items-center justify-center gap-1 mb-2" role="img" aria-label={`Rating ${testimonial.rating} dari 5 bintang`}>
+                {Array.from({ length: 5 }).map((_, idx) => (
                   <Star 
-                    key={i} 
-                    className={`h-5 w-5 ${i < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-muted'}`} 
+                    key={idx} 
+                    className={`h-4 w-4 ${idx < testimonial.rating ? 'text-amber-400 fill-amber-400' : 'text-muted-foreground'}`}
+                    aria-hidden="true"
                   />
                 ))}
               </div>
-              <p className="text-foreground mb-6 italic">"{testimonial.quote}"</p>
-              <div className="flex items-center gap-4">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                  <Image
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-semibold">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
+              <blockquote className="italic text-muted-foreground text-sm mb-3">
+                &ldquo;{testimonial.quote}&rdquo;
+              </blockquote>
+              <cite className="not-italic">
+                <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
+                <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+              </cite>
+            </motion.article>
           ))}
-        </div>
-
-        {/* App ratings */}
-        <div 
-          className="mt-16 bg-muted/40 rounded-2xl p-8 max-w-3xl mx-auto"
-          style={{
-            opacity: isInView ? 1 : 0,
-            transform: isInView ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'opacity 0.5s ease 0.4s, transform 0.5s ease 0.4s'
-          }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-2xl font-bold">4.9</p>
-              <p className="text-sm text-muted-foreground">App Store</p>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-2">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <p className="text-2xl font-bold">4.8</p>
-              <p className="text-sm text-muted-foreground">Google Play</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold">100k+</p>
-              <p className="text-sm text-muted-foreground">Downloads</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

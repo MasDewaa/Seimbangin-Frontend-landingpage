@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MascotBalanziPro from "./mascot-balanzi-pro";
 
 export function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -13,118 +12,75 @@ export function HeroSection() {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-gradient-to-b from-background to-background/90 pb-20">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 opacity-[0.02]">
-        <div className="absolute top-1/4 -left-20 w-80 h-80 rounded-full bg-primary/20 blur-3xl"></div>
-        <div className="absolute top-1/3 right-0 w-64 h-64 rounded-full bg-teal-500/20 blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl"></div>
-      </div>
-
-      {/* Navbar */}
-      <nav className="relative z-50 px-4 md:px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center">
-            <span className="text-white font-bold text-xl">S</span>
-          </div>
-          <span className="font-bold text-xl text-foreground">seimbang.in</span>
-        </div>
-
-        <div className="hidden md:flex items-center gap-6">
-          <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
-          <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Testimonials</a>
-          <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
-          <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Button className="gap-2 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700">
-            Download Now</Button>
-        </div>
-      </nav>
-
+    <section
+      className="relative w-full min-h-[90vh] flex flex-col justify-center overflow-hidden pb-10"
+      aria-labelledby="hero-heading"
+    >
       {/* Hero content */}
-      <div className="relative z-10 px-4 pt-16 md:pt-24 lg:pt-32 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-6 items-center">
+      <div className="relative z-10 flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-8 gap-20 lg:gap-0">
+        {/* Left: Text */}
         <motion.div 
-          className="text-center lg:text-left"
-          initial={{ opacity: 0, y: 20 }}
+          className="flex-1 text-center lg:text-left"
+          initial={{ opacity: 0.9, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.7 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-            Manage Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-emerald-600">Money</span> With Confidence
+          <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-blue-400 to-blue-700 text-white text-xs font-semibold shadow-md tracking-wide">
+            Smart Money, Balanced Journey
+          </span>
+          <h1 
+            id="hero-heading"
+            className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight text-foreground"
+          >
+            Financial Balance, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-700">Made Simple</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-            Take control of your finances with simple tracking, smart budgeting, and actionable insights to reach your financial goals.
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0 font-light">
+            Seimbang.in membantu kamu mengelola keuangan dengan mudah, cerdas, dan tetap fun. Satu aplikasi, semua solusi finansial.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
-            <Button size="lg" className="gap-2 bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700">
-              Download App <Download className="h-5 w-5" />
+            <Button 
+              size="lg" 
+              className="gap-2 bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-500 hover:to-blue-800 shadow-md text-base font-semibold px-8 py-4 rounded-full"
+              asChild
+            >
+              <a href="#cta">Mulai Sekarang</a>
             </Button>
-            <Button size="lg" variant="outline" className="gap-2">
-              Learn More <ArrowRight className="h-5 w-5" />
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="gap-2 border-2 border-blue-500 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 text-base font-semibold px-8 py-4 rounded-full"
+              asChild
+            >
+              <a href="#features">Lihat Demo</a>
             </Button>
           </div>
-          <div className="mt-8 flex items-center justify-center lg:justify-start gap-4">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-8 h-8 rounded-full border-2 border-background overflow-hidden">
-                  <Image
-                    src={`https://randomuser.me/api/portraits/men/${i + 10}.jpg`}
-                    alt="User"
-                    width={32}
-                    height={32}
-                  />
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              <span className="font-bold text-foreground">10,000+</span> happy users
-            </p>
+          {/* Badge/testimoni kecil */}
+          <div className="flex items-center gap-2 mt-8 justify-center lg:justify-start">
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-muted text-xs font-semibold text-foreground shadow">
+              <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true">
+                <circle cx="8" cy="8" r="8" fill="#60a5fa"/>
+                <text x="8" y="12" textAnchor="middle" fontSize="10" fill="#fff">★</text>
+              </svg>
+              4.9/5 dari 10.000+ pengguna
+            </span>
           </div>
         </motion.div>
 
+        {/* Right: Ilustrasi SVG custom */}
         <motion.div 
-          className="relative flex justify-center"
+          className="flex-1 flex justify-center items-center relative"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          style={{ 
-            transform: `translateY(${scrollY * 0.05}px)` 
-          }}
+          transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <div className="relative w-[280px] md:w-[320px] h-[580px] md:h-[640px] rounded-[40px] overflow-hidden shadow-2xl border-8 border-black bg-black">
-            <Image
-              src="https://images.pexels.com/photos/6693655/pexels-photo-6693655.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-              alt="Seimbang.in App"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute top-0 left-0 right-0 h-6 bg-black rounded-t-3xl"></div>
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-black rounded-b-xl"></div>
-          </div>
-          <div className="absolute -right-32 top-1/3 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl"></div>
-          <div className="absolute -left-32 top-1/2 w-64 h-64 rounded-full bg-emerald-500/10 blur-3xl"></div>
+          {/* Maskot animasi BalanziPro */}
+          <MascotBalanziPro className="w-[220px] h-[250px] md:w-[500px] md:h-[500px] drop-shadow-2xl" />
         </motion.div>
-      </div>
-
-      {/* Brands */}
-      <div className="relative z-10 mt-20 md:mt-32 px-4 mx-auto max-w-7xl">
-        <p className="text-center text-sm font-medium text-muted-foreground mb-6">TRUSTED BY LEADING COMPANIES</p>
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-          {['Stripe', 'Airbnb', 'Spotify', 'Amazon', 'Microsoft'].map((brand) => (
-            <div key={brand} className="text-muted-foreground/50 font-semibold text-lg md:text-xl">
-              {brand}
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

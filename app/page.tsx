@@ -1,11 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Check, ChevronRight, Download, BarChart3, Wallet, PieChart, Bell, Shield, Star } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { useEffect, useCallback } from "react";
 import { HeroSection } from "@/components/landing/hero-section";
 import { FeatureSection } from "@/components/landing/feature-section";
 import { TestimonialSection } from "@/components/landing/testimonial-section";
@@ -14,35 +9,48 @@ import { PricingSection } from "@/components/landing/pricing-section";
 import { FaqSection } from "@/components/landing/faq-section";
 import { CtaSection } from "@/components/landing/cta-section";
 import { FooterSection } from "@/components/landing/footer-section";
-import { ThemeProvider } from "@/components/theme-provider";
+import WhySection from "@/components/landing/why-section";
+import HowSection from "@/components/landing/how-section";
+import Navbar from "@/components/landing/navbar";
 
 export default function Home() {
-  // Smooth scroll for anchor links
-  useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      
-      if (anchor) {
-        e.preventDefault();
-        const targetId = anchor.getAttribute('href');
-        if (targetId && targetId.startsWith('#')) {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
+  // Smooth scroll for anchor links with better performance
+  const handleAnchorClick = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest('a[href^="#"]');
+    
+    if (anchor) {
+      e.preventDefault();
+      const targetId = anchor.getAttribute('href');
+      if (targetId && targetId.startsWith('#')) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
       }
-    };
-
-    document.addEventListener('click', handleAnchorClick);
-    return () => document.removeEventListener('click', handleAnchorClick);
+    }
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('click', handleAnchorClick, { passive: false });
+    return () => document.removeEventListener('click', handleAnchorClick);
+  }, [handleAnchorClick]);
+
   return (
-    <ThemeProvider defaultTheme="light" storageKey="seimbang-theme">
-      <main className="min-h-screen overflow-hidden">
+    <>
+      {/* Skip link for accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      
+      <main id="main-content" className="min-h-screen overflow-hidden">
+        <Navbar />
         <HeroSection />
+        <WhySection />
+        <HowSection />
         <FeatureSection />
         <TestimonialSection />
         <ScreenshotGallery />
@@ -51,6 +59,6 @@ export default function Home() {
         <CtaSection />
         <FooterSection />
       </main>
-    </ThemeProvider>
+    </>
   );
 }
