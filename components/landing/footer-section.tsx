@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Facebook, Twitter, Instagram, Linkedin, Globe, Mail, Phone } from "lucide-react";
 
 export function FooterSection() {
@@ -11,9 +12,15 @@ export function FooterSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-lg">S</span>
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-10 h-10 flex items-center justify-center">
+                <Image
+                  src="/logo-app.svg"
+                  alt="Seimbang.in Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full"
+                />
               </div>
               <span className="font-bold text-lg text-foreground tracking-tight">seimbang.in</span>
             </div>

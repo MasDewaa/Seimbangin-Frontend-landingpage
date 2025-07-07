@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useCallback } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { href: "#why", label: "Mengapa" },
@@ -28,9 +29,15 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur border-b border-border/40 shadow-sm transition-all">
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3" aria-label="Main navigation">
         {/* Logo */}
-        <Link href="#" className="flex items-center gap-2" aria-label="Seimbang.in Home">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center shadow-md" aria-hidden="true">
-            <span className="text-white font-bold text-lg">S</span>
+        <Link href="#" className="flex items-center gap-3" aria-label="Seimbang.in Home">
+          <div className="w-10 h-10 flex items-center justify-center" aria-hidden="true">
+            <Image
+              src="/logo-app.svg"
+              alt="Seimbang.in Logo"
+              width={40}
+              height={40}
+              className="w-full h-full"
+            />
           </div>
           <span className="font-bold text-lg text-foreground tracking-tight">seimbang.in</span>
         </Link>

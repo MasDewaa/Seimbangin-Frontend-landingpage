@@ -67,13 +67,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo-app.svg', type: 'image/svg+xml' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/logo-app.svg',
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/logo-app.svg', type: 'image/svg+xml' },
     ],
   },
   manifest: '/site.webmanifest',
@@ -118,7 +116,7 @@ export default function RootLayout({
             "@type": "Organization",
             "name": "Seimbang.in",
             "url": "https://seimbangin.site",
-            "logo": "https://seimbangin.site/logo.png",
+            "logo": "https://seimbangin.site/logo-app.svg",
             "description": "Seimbang.in membantu kamu mengelola keuangan dengan mudah, cerdas, dan tetap fun.",
             "sameAs": [
               "https://twitter.com/seimbangin",
