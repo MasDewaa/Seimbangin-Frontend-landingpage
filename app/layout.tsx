@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://seimbangin.site'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://seimbangin.site',
   },
   openGraph: {
     type: 'website',
@@ -56,6 +56,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -78,6 +79,9 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   verification: {
     google: 'your-google-verification-code',
+  },
+  other: {
+    'google-site-verification': 'your-google-verification-code',
   },
 };
 

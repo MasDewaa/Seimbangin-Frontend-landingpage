@@ -12,9 +12,5 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
 
-# Allow important pages
-Allow: /features
-Allow: /pricing
-Allow: /faq
-Allow: /about
-Allow: /contact 
+# Allow all content for single-page application
+Allow: / 
