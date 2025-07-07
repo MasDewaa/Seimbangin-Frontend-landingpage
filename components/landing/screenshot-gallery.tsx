@@ -8,27 +8,27 @@ export function ScreenshotGallery() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  // Mockup screenshots of app screens
+  // Screenshots of Seimbang.in app screens
   const screenshots = [
     {
-      title: "Dashboard Overview",
-      image: "https://images.pexels.com/photos/6693661/pexels-photo-6693661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Get a quick overview of your finances at a glance"
+      title: "Halaman Utama",
+      image: "/HomePage - 6.png",
+      description: "Dashboard utama dengan ringkasan keuangan Anda"
     },
     {
-      title: "Budget Planning",
-      image: "https://images.pexels.com/photos/6693655/pexels-photo-6693655.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Set and manage your budgets by category"
+      title: "Tambah Transaksi",
+      image: "/Add Transaction - 3.png",
+      description: "Catat pemasukan dan pengeluaran dengan mudah"
     },
     {
-      title: "Expense Tracking",
-      image: "https://images.pexels.com/photos/6693645/pexels-photo-6693645.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Log and categorize your expenses effortlessly"
+      title: "Hasil & Laporan",
+      image: "/Outcome - 3.png",
+      description: "Lihat laporan keuangan dan analisis pengeluaran"
     },
     {
-      title: "Financial Reports",
-      image: "https://images.pexels.com/photos/6693649/pexels-photo-6693649.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      description: "Detailed insights into your spending patterns"
+      title: "Chat Advisor",
+      image: "/Chat Advisor - 3.png",
+      description: "Konsultasi keuangan dengan AI advisor"
     }
   ];
 
@@ -49,9 +49,9 @@ export function ScreenshotGallery() {
             transition: 'opacity 0.5s ease, transform 0.5s ease'
           }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Beautiful Interface, Powerful Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Interface Cantik, Fitur Canggih</h2>
           <p className="text-lg text-muted-foreground">
-            Take a peek at how seimbang.in helps you manage your money with style and simplicity.
+            Lihat bagaimana Seimbang.in membantu Anda mengelola uang dengan gaya dan kemudahan.
           </p>
         </div>
 
