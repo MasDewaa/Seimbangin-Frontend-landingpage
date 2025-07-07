@@ -63,7 +63,7 @@ export function PricingSection() {
           {plans.map((plan, index) => (
             <motion.article
               key={index}
-              className={`relative bg-card rounded-3xl p-8 shadow-lg border border-border/30 flex flex-col items-center text-center group transition-all duration-300 hover:shadow-xl ${plan.popular ? 'ring-2 ring-teal-500/60 scale-105 z-10' : ''}`}
+              className={`relative bg-card rounded-3xl p-8 shadow-lg border border-border/30 flex flex-col items-center text-center group transition-all duration-300 hover:shadow-xl ${plan.popular ? 'ring-2 ring-blue-500/60 scale-105 z-10' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
